@@ -6,10 +6,24 @@ declare const player: any;
 export class StereoService {
 
   
-  public _ready: boolean = false;
+  
   constructor() {
     console.log(player);
    }
+
+   private state(): number {
+     if (player) return player.getPlayerState();
+     return -1;
+   }
+
+   ready(): boolean {
+    return this.state() === 5;
+  }
+
+  // TESTING ONLY
+  play(): void {
+    player.playVideo();
+  }
 
 
 
