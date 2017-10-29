@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 // Services
-import { StereoService } from './stereo.service';
+import { StereoService } from './services/stereo.service';
 import { HomeComponent } from './home/home.component';
 
 // Routes

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StereoService } from '../stereo.service';
+import { StereoService } from '../services/stereo.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.stereo.stateChanged
     .subscribe(
-      (state) => console.log("Home got a new status of " + state)
+      // Do something with new state
     );
   }
 

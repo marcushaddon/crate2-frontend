@@ -23,5 +23,7 @@ export class StereoService {
     this.stateChanged.next(this._state);
   }
 
+  
+
 
 }
