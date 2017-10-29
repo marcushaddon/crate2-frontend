@@ -1,30 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, NgZone } from '@angular/core';
+
 
 declare const player: any;
 
 @Injectable()
 export class StereoService {
 
+  private _state: number;
+  stateChanged: EventEmitter<number> = new EventEmitter();
   
-  
-  constructor() {
-    console.log(player);
+  constructor(private zone: NgZone) {
+    // Expose this to outside scripts
+    window['stereo'] = this;
    }
 
-   private state(): number {
-     if (player) return player.getPlayerState();
-     return -1;
-   }
-
-   ready(): boolean {
-    return this.state() === 5;
+  get state() {
+    return this._state;
   }
 
-  // TESTING ONLY
-  play(): void {
-    player.playVideo();
+  set state(newState: number) {
+    this._state = newState;
+    this.stateChanged.next(this._state);
   }
-
 
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StereoService } from '../stereo.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,18 +9,21 @@ import { StereoService } from '../stereo.service';
 })
 export class HomeComponent implements OnInit {
 
+  
+
   constructor(
-    private _stereo: StereoService
+    private stereo: StereoService
   ) { }
 
   ngOnInit() {
-
+    this.stereo.stateChanged
+    .subscribe(
+      (state) => console.log("Home got a new status of " + state)
+    );
   }
 
-  // TESTING ONLY
-  play(): void {
-    this._stereo.play();
-  }
+
+  
 
 
 }
