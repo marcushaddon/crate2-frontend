@@ -1,0 +1,20 @@
+<p>
+  <button (click)="back()">Back</button>
+  <button (click)="playToggle()">PlayToggle</button>
+  <button (click)="next()">Next</button>
+  <span *ngIf="isLoading">LOADING</span>
+  <span *ngIf="stereo.state === 1">IM PLAYING</span>
+  <span *ngIf="stereo.state === 2">PAUSED, YO</span>
+  {{"state: " + stereo.state}}
+
+</p>
+
+<ol>
+  <li *ngFor="let tracklist of tracklists"><a href="#" (click)="cueList(tracklist);" >{{tracklist.name}}</a> <strong *ngIf="stereo.trackList == tracklist">CURRENT TRACKLIST</strong></li>
+</ol>
+
+<ol>
+  <li *ngFor="let track of stereo.tracks">
+    {{track.trackName}} <strong *ngIf="stereo.track == track">CURRENTLY PLAYING</strong>
+  </li>
+</ol>
