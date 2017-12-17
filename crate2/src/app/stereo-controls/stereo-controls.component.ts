@@ -26,14 +26,20 @@ export class StereoControlsComponent implements OnInit {
       albumA,
       playlistB
     ];
+
     this.stereo.stateChanged
     .subscribe(
       (state) => {
-        this.currentTime = this.stereo.videoProgress;
         this.state = state;
-        this.ref.detectChanges();
       },
       (err) => console.log(err)
+    );
+
+    this.stereo.timeChanged
+    .subscribe(
+      (t) => {
+        this.currentTime = this.stereo.videoProgress;
+      }
     );
 
 
@@ -64,8 +70,8 @@ export class StereoControlsComponent implements OnInit {
   }
 
   seek(event) {
-    const time = event.target.value;
-    console.log(time);
+    const t = event.target.value;
+    this.stereo.seek(t);
   }
 
   cueList(tracklist: ITrackList) {

@@ -23,6 +23,7 @@
 <input 
   type="range" 
   (mouseup)="seek($event)"
-  min="startTime"
-  max="stopTime"
+  [min]="startTime"
+  [max]="stopTime"
+  [value]="currentTime"
   />
