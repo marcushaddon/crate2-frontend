@@ -16,7 +16,9 @@ export class StereoControlsComponent implements OnInit {
   constructor(public stereo: StereoService, private ref: ChangeDetectorRef) { }
   state: number;
   tracklists: ITrackList[];
-  
+  startTime = 0;
+  stopTime = 100;
+  currentTime = 0;
 
   ngOnInit() {
     this.state = 0;
@@ -27,6 +29,7 @@ export class StereoControlsComponent implements OnInit {
     this.stereo.stateChanged
     .subscribe(
       (state) => {
+        this.currentTime = this.stereo.videoProgress;
         this.state = state;
         this.ref.detectChanges();
       },
@@ -37,11 +40,15 @@ export class StereoControlsComponent implements OnInit {
     this.stereo.trackChanged
     .subscribe(
       (track) => {
-        if (track) console.log("TRACK CHANGED " + track.name);
+        if (track) {
+          this.startTime = track.begin;
+          this.stopTime = track.stop;
+          this.ref.detectChanges();
+        }
       }
-    )
+    );
 
-    
+
   }
 
   playToggle() {
@@ -56,11 +63,18 @@ export class StereoControlsComponent implements OnInit {
     this.stereo.back();
   }
 
+  seek(event) {
+    const time = event.target.value;
+    console.log(time);
+  }
+
   cueList(tracklist: ITrackList) {
     // Example of how components may be responsible for determining
     // if a tracklist is ready to be queueed or if its tracks must be fetched first
     // (imaging this was calling an API service instead)
-    if (!tracklist.tracks) tracklist.tracks = tracksA;
+    if (!tracklist.tracks) {
+      tracklist.tracks = tracksA;
+    }
     this.stereo.cueTracklist(tracklist);
   }
 

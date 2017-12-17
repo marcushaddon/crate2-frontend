@@ -6,6 +6,7 @@
   <span *ngIf="stereo.state === 1">IM PLAYING</span>
   <span *ngIf="stereo.state === 2">PAUSED, YO</span>
   {{"state: " + stereo.state}}
+  time: {{stereo.currentTrackTime | friendlyTime }}
 
 </p>
 
@@ -18,3 +19,10 @@
     {{track.trackName}} <strong *ngIf="stereo.track == track">CURRENTLY PLAYING</strong>
   </li>
 </ol>
+
+<input 
+  type="range" 
+  (mouseup)="seek($event)"
+  min="startTime"
+  max="stopTime"
+  />

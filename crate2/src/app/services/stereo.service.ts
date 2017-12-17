@@ -17,11 +17,20 @@ export class StereoService {
   // For this and components to subscribe to
   timeChanged: BehaviorSubject<number> = new BehaviorSubject(0);
 
+  tracklistChanged: BehaviorSubject<ITrackList> = new BehaviorSubject(null);
+
+  // Current tracklist
+  private _tracks: Track[];
+
+  tracksChanged: BehaviorSubject<Track[]> = new BehaviorSubject(null);
+
+    // Current track
+    public trackIndex: number;
+    private _track: Track;
+    trackChanged: BehaviorSubject<Track> = new BehaviorSubject(null);
+
   // Playback point of our current track
-  get currentTrackTime(): number {
-    if (!this.track) return 0;
-    return player.getCurrentTime() - this.track.begin;
-  }
+  currentTrackTime = 0;
 
   // For internal use
   private _timer = null;
@@ -30,11 +39,14 @@ export class StereoService {
   // Current album or playlist
   private _tracklist: ITrackList;
 
+
+
   set tracklist(tracklist: ITrackList) {
     this._tracklist = tracklist;
     // Don't alert everyone if we already have this tracklist queeueeued
-    if (this._tracklist._id === tracklist._id) return;
-
+    if (this._tracklist._id === tracklist._id) {
+      return;
+    }
     this.tracklistChanged.next(this._tracklist);
   }
 
@@ -51,10 +63,7 @@ export class StereoService {
     }
   }
 
-  tracklistChanged: BehaviorSubject<ITrackList> = new BehaviorSubject(null);
-  
-  // Current tracklist
-  private _tracks: Track[];
+
 
   set tracks(tracks: Track[]) {
     this._tracks = tracks;
@@ -72,12 +81,6 @@ export class StereoService {
     this.cueTrack(this.tracks[0]);
   }
 
-  tracksChanged: BehaviorSubject<Track[]> = new BehaviorSubject(null);
-
-  // Current track
-  public trackIndex: number;
-  private _track: Track;
-
   set track(track: Track) {
     this._track = track;
     // EDGECASE: Need to check somethig more specific in case playlists have repeated tracks
@@ -92,36 +95,37 @@ export class StereoService {
   public cueTrack(track: Track): void {
     // If it's part of the same video, just cue to the beginning
     let newVideo = true;
-    if (this.track !== undefined && this.track.videoId === track.videoId) newVideo = false;
+    if (this.track !== undefined && this.track.videoId === track.videoId) {
+      newVideo = false;
+    }
     this.track = track;
     if (newVideo) {
-      player.loadVideoById({ 
-        videoId: this.track.videoId, 
-        startSeconds: this.track.begin 
+      player.loadVideoById({
+        videoId: this.track.videoId,
+        startSeconds: this.track.begin
       });
 
       // Start timing
       this._startTiming();
 
       // Make sure google isn't messing with our time
-      let googleGlitch = this.stateChanged
+      const googleGlitch = this.stateChanged
       .subscribe(
         (state) => {
           if (this.isPlaying) {
             if (this.videoProgress > this.track.begin + 5) {
-              console.log("FUCKERY");
+              console.log('FUCKERY"');
               player.seekTo(this.track.begin);
             }
-            googleGlitch.unsubscribe(); 
+            googleGlitch.unsubscribe();
           }
         });
 
     } else {
       player.seekTo(this.track.begin);
-    }    
+    }
   }
 
-  trackChanged: BehaviorSubject<Track> = new BehaviorSubject(null);
 
   get state() {
     return this._state;
@@ -144,12 +148,15 @@ export class StereoService {
   get isPaused(): boolean {
     return player !== undefined && player.getPlayerState() === 2;
   }
-  
+
   get cuedVideoLength(): number {
     return player.getDuration();
   }
 
-  get videoProgress():number {
+  get videoProgress(): number {
+    if (player.getCurrentTime === undefined) {
+      return 0;
+    }
     return player.getCurrentTime();
   }
 
@@ -158,7 +165,7 @@ export class StereoService {
   }
 
   togglePlay() {
-    switch(player.getPlayerState()) {
+    switch (player.getPlayerState()) {
       case -1:
       case 0:
       case 2:
@@ -205,14 +212,14 @@ export class StereoService {
     .timeInterval()
     .map(function (x) { return x.value; });
 
-    // We also need to subscribe to ourselves to make decisions 
+    // We also need to subscribe to ourselves to make decisions
     // about whether to load the next song yet
     this._timerSubscription = this._timer.subscribe(
       e => {
         this._handleTimeChange();
         this.timeChanged.next(player.getCurrentTime());
       },
-      err => console.log("Stereo timer error!")
+      err => console.log('Stereo timer error!')
     );
   }
 
@@ -223,19 +230,27 @@ export class StereoService {
   }
 
   private _handleTimeChange(): void {
-    if (!this.track) return;
+    if (!this.track) {
+      this.currentTrackTime = 0;
+      return;
+    }
+
+    // Update our track time
+    const trackTime = player.getCurrentTime() - this.track.begin;
+    this.currentTrackTime = trackTime;
+
+    // Do we need to go to the next track?
     if (player.getCurrentTime() >= this.track.stop) {
-      console.log("Time for the next song!");
+      console.log('Time for the next song!');
       this.next();
     }
   }
 
 
-  
   constructor() {
     // Expose this to outside scripts
     window['stereo'] = this;
-    this.trackIndex = 0;   
+    this.trackIndex = 0;
   }
 
 }

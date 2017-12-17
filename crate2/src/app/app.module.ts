@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { StereoService } from './services/stereo.service';
 import { HomeComponent } from './home/home.component';
 import { StereoControlsComponent } from './stereo-controls/stereo-controls.component';
+import { FriendlyTimePipe } from './pipes/friendly-time.pipe';
 
 // Routes
 const APP_ROUTES: Routes = [
@@ -19,7 +20,8 @@ const APP_ROUTES: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    StereoControlsComponent
+    StereoControlsComponent,
+    FriendlyTimePipe
   ],
   imports: [
     BrowserModule,
