@@ -154,7 +154,7 @@ export class StereoService {
   }
 
   get videoProgress(): number {
-    if (player.getCurrentTime === undefined) {
+    if (!player || player.getCurrentTime === undefined) {
       return 0;
     }
     return player.getCurrentTime();
