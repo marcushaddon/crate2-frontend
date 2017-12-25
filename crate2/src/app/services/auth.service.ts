@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -8,8 +8,10 @@ export class AuthService {
 
   constructor(public http: Http) { }
 
-  public Login(username: string, password: string): Observable<boolean> {
-    const endpoint = environment.apiUrl + 'auth/login';
+  public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject(null);
+
+  public login(username: string, password: string): void {
+    const endpoint = environment.baseUrl + 'auth/login';
     const data = {
       username: username,
       password: password
@@ -17,16 +19,18 @@ export class AuthService {
 
     const result = this.http.post(endpoint, data);
 
-
+    // We'll handle setting the token, rather than letting whatever components know
     result
     .map(res => res.json())
     .subscribe(
-      (token) => window.localStorage.setItem('crate-jwt-token', token),
-      (err) => console.log('Error signing in!')
+      (token) => {
+        window.localStorage.setItem('crate-jwt-token', token);
+        this.loggedIn.next(true);
+      },
+      (err) => {
+        console.log('Error signing in!');
+        this.loggedIn.next(false);
+      }
     );
-
-    return result
-    .map(res => res.status === 201 ? true : false );
-
   }
 }

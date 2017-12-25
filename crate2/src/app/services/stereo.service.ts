@@ -250,6 +250,7 @@ export class StereoService {
   constructor() {
     // Expose this to outside scripts
     window['stereo'] = this;
+    this.state = 0;
     this.trackIndex = 0;
   }
 
