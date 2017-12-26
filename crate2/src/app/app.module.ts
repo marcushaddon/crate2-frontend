@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -17,6 +18,9 @@ import { LoginComponent } from './login/login.component';
 
 // Pipes
 import { FriendlyTimePipe } from './pipes/friendly-time.pipe';
+
+// Interceptors
+import { JWTInterceptor } from './interceptors/jwt.interceptor';
 
 // Routes
 const APP_ROUTES: Routes = [
@@ -36,11 +40,17 @@ const APP_ROUTES: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
     StereoService,
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
