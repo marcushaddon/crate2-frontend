@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StereoService } from '../services/stereo.service';
+import { UserService } from '../services/user.service';
 // TESTING
-import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -15,17 +16,21 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private stereo: StereoService,
-    private http: HttpClient
+    private user: UserService
   ) { }
 
+  message = 'Welcome to Crate, stranger!';
+
   ngOnInit() {
-    this.stereo.stateChanged
+    this.user.meUpdated
     .subscribe(
-      // Do something with new state
+      me => this.message = me && me.userName ? `Welcome to Crate, ${me.userName}!` : 'Welcome to Crate, stringer!',
+      err => this.message = 'There was an error fetching your identity!'
     );
 
-    this.http.get('http://localhost:3000/api/album/58a1d8d7bbfe602d03557125')
-    .subscribe(data => console.log(data));
+    if (!this.user.me) {
+      this.user.fetchIdentity();
+    }
 
 
   }

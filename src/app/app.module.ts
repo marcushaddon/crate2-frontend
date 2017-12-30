@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 // Services
 import { StereoService } from './services/stereo.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 // Components
 import { HomeComponent } from './home/home.component';
@@ -46,6 +47,7 @@ const APP_ROUTES: Routes = [
   providers: [
     StereoService,
     AuthService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JWTInterceptor,

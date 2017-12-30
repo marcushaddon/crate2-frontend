@@ -19,7 +19,7 @@ export class User {
 }
 
 
-export class ShortUser{
+export class ShortUser {
     public _id: string;
     public userName: string;
 }
