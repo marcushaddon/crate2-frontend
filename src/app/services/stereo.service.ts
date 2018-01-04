@@ -86,6 +86,7 @@ export class StereoService {
     // EDGECASE: Need to check somethig more specific in case playlists have repeated tracks
     this.trackIndex = this._tracks.indexOf(track);
     this.trackChanged.next(this._track);
+    
   }
 
   get track(): Track {
@@ -124,6 +125,7 @@ export class StereoService {
     } else {
       player.seekTo(this.track.begin);
     }
+    // TODO: Increment track listens
   }
 
 

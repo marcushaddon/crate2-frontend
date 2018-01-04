@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { User, ShortUser } from '../models/user';
 
 @Injectable()
-export class IdentityService extends CrateService {
+export class MeService extends CrateService {
 
   constructor(private http: HttpClient) {
     super();

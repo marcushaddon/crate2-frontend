@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 // Services
 import { StereoService } from './services/stereo.service';
 import { AuthService } from './services/auth.service';
-import { IdentityService } from './services/identity.service';
+import { MeService } from './services/me.service';
 import { UserService } from './services/user.service';
 import { ArtistService } from './services/artist.service';
 
@@ -51,7 +51,7 @@ const APP_ROUTES: Routes = [
   providers: [
     StereoService,
     AuthService,
-    IdentityService,
+    MeService,
     UserService,
     ArtistService,
     {
