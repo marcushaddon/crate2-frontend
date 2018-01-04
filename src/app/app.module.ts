@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 // Services
 import { StereoService } from './services/stereo.service';
 import { AuthService } from './services/auth.service';
+import { IdentityService } from './services/identity.service';
 import { UserService } from './services/user.service';
 import { ArtistService } from './services/artist.service';
 
@@ -23,6 +24,7 @@ import { FriendlyTimePipe } from './pipes/friendly-time.pipe';
 
 // Interceptors
 import { JWTInterceptor } from './interceptors/jwt.interceptor';
+import { DeleteMeComponent } from './delete-me/delete-me.component';
 
 // Routes
 const APP_ROUTES: Routes = [
@@ -36,7 +38,8 @@ const APP_ROUTES: Routes = [
     HomeComponent,
     StereoControlsComponent,
     FriendlyTimePipe,
-    LoginComponent
+    LoginComponent,
+    DeleteMeComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ const APP_ROUTES: Routes = [
   providers: [
     StereoService,
     AuthService,
+    IdentityService,
     UserService,
     ArtistService,
     {

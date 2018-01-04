@@ -10,10 +10,10 @@ export class CrateService extends EnvironmentAwareService {
     }
 
     protected buildOptions(pagination: PaginationOptions): object {
-        const params = new HttpParams();
+        let params = new HttpParams();
 
-        const paramKeys = Object.keys(pagination);
-        paramKeys.forEach(key => params.set(key, pagination[key]));
+        Object.keys(pagination)
+        .forEach(key => params = params.set(key, pagination[key]));
 
         const options = {
             params: params

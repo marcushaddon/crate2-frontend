@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StereoService } from '../services/stereo.service';
-import { UserService } from '../services/user.service';
-// TESTING
-
-
 
 @Component({
   selector: 'app-home',
@@ -14,25 +9,11 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(
-    private stereo: StereoService,
-    private user: UserService
-  ) { }
+  constructor() { }
 
   message = 'Welcome to Crate, stranger!';
 
   ngOnInit() {
-    this.user.meUpdated
-    .subscribe(
-      me => this.message = (me && me.userName) ? `Welcome to Crate, ${me.userName}!` : 'Welcome to Crate, stringer!',
-      err => this.message = 'There was an error fetching your identity!'
-    );
-
-    if (!this.user.me) {
-      this.user.fetchIdentity();
-    }
-
-
   }
 
 
