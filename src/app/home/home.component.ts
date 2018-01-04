@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.user.meUpdated
     .subscribe(
-      me => this.message = me && me.userName ? `Welcome to Crate, ${me.userName}!` : 'Welcome to Crate, stringer!',
+      me => this.message = (me && me.userName) ? `Welcome to Crate, ${me.userName}!` : 'Welcome to Crate, stringer!',
       err => this.message = 'There was an error fetching your identity!'
     );
 
