@@ -33,25 +33,20 @@ export class ArtistService extends CrateService {
 
   getArtistTracks(artistId: string, pagination: PaginationOptions = PaginationOptions.Default): Observable<Track[]> {
     const endpoint = this._apiUrl + `artist/${artistId}/tracks`;
-    const params = new HttpParams();
-
-    const paramKeys = Object.keys(pagination);
-    paramKeys.forEach(key => params.set(key, pagination[key]));
-
-    const options = {
-      params: params
-    };
+    const options = this.buildOptions(pagination);
     return this.http.get<Track[]>(endpoint, options);
   }
 
-  createArtist(artist: Artist): BehaviorSubject<Artist> {
-
+  createArtist(artist: Artist): Observable<Artist> {
+    const endpoint = this._apiUrl + 'artist';
+    return this.http.post<Artist>(endpoint, artist);
   }
 
-  updateArtist(artist: Artist): BehaviorSubject<Artist> {
-
+  updateArtist(artist: Artist): Observable<Artist> {
+    const endpoint = this._apiUrl + `artist/${artist._id}`;
+    return this.http.put<Artist>(endpoint, artist);
   }
 
-  
+
 
 }
