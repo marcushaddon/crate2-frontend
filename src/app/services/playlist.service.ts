@@ -33,7 +33,7 @@ export class PlaylistService extends CrateService {
   }
 
   incrementListens(playlist: Playlist): Observable<Playlist> {
-    const endpoint = `playlist/${playlist_id}/increment-listens`;
+    const endpoint = `playlist/${playlist._id}/increment-listens`;
     return this.http.put<Playlist>(endpoint, playlist);
   }
 
