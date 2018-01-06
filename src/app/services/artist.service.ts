@@ -47,6 +47,11 @@ export class ArtistService extends CrateService {
     return this.http.put<Artist>(endpoint, artist);
   }
 
+  incrementListens(artist: Artist): Observable<Artist> {
+    const endpoint = this._apiUrl + `artist/${artist._id}/increment-listens`;
+    return this.http.put<Artist>(endpoint, artist);
+  }
+
 
 
 }

@@ -43,6 +43,11 @@ export class AlbumService extends CrateService {
     return this.http.put<Album>(endpoint, album);
   }
 
+  incrementListens(album: Album): Observable<Album> {
+    const endpoint = this._apiUrl + `album/${album._id}/increment-listens`;
+    return this.http.put<Album>(endpoint, album);
+  }
+
   deleteAlbum(album: Album): Observable<Response> {
     const endpoint = this._apiUrl + `album/${album._id}`;
     return this.http.delete<Response>(endpoint);
