@@ -25,4 +25,11 @@ export class PlaylistService extends CrateService {
     return this.http.get<Playlist>(endpoint);
   }
 
+  // There is no 'getPlaylistTracks method because a playlist's tracks are nested isnide it
+
+  updatePlaylist(playlist: Playlist): Observable<Playlist> {
+    const endpoint = `playlist/${playlist._id}`;
+    return this.http.put<Playlist>(endpoint, playlist);
+  }
+
 }
