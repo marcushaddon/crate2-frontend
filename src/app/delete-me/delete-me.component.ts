@@ -15,8 +15,8 @@ export class DeleteMeComponent implements OnInit {
   constructor(private albums: AlbumService, private me: MeService) { }
 
   ngOnInit() {
-    let page = new PaginationOptions();
-    page.sort = SortBy.DateCreated;
+    const page = new PaginationOptions();
+    console.log(page);
     this.albums.getAlbums(page)
     .subscribe(
       albums => console.log(albums)

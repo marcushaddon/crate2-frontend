@@ -22,4 +22,10 @@ export class AlbumService extends CrateService {
     return this.http.get<Album[]>(endpoint, options);
   }
 
+  getAlbum(albumId: string, pagination = PaginationOptions.Default) {
+    const endpoint = this._apiUrl + `album/${albumId}`;
+    const options = this.buildOptions(pagination);
+    return this.http.get<Album>(endpoint, options);
+  }
+
 }
