@@ -29,7 +29,7 @@ export class AlbumService extends CrateService {
   }
 
   getAlbumTracks(albumId: string) {
-    const endpoint = this._apiUrl + `album${albumId}`;
+    const endpoint = this._apiUrl + `album/${albumId}/tracks`;
     return this.http.get<Album>(endpoint);
   }
 
