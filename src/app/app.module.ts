@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 import { MeService } from './services/me.service';
 import { UserService } from './services/user.service';
 import { ArtistService } from './services/artist.service';
+import { AlbumService } from './services/album.service';
 
 // Components
 import { HomeComponent } from './home/home.component';
@@ -54,6 +55,7 @@ const APP_ROUTES: Routes = [
     MeService,
     UserService,
     ArtistService,
+    AlbumService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JWTInterceptor,

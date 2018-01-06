@@ -6,3 +6,5 @@ export * from './models/itrack-list';
 export * from './models/track';
 export * from './models/discogs-entity';
 
+export * from './models/pagination-options';
+

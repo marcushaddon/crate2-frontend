@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../services/artist.service';
-import { UserService } from '../services/user.service';
+import { AlbumService } from '../services/album.service';
 import { MeService } from '../services/me.service';
-import { PaginationOptions } from '../models/pagination-options';
-import { SortBy } from '../enums/sort-options.enum';
+import { PaginationOptions } from '../models';
+import { SortBy, Sort } from '../enums/sort-options.enum';
 
 @Component({
   selector: 'app-delete-me',
@@ -12,13 +12,14 @@ import { SortBy } from '../enums/sort-options.enum';
 })
 export class DeleteMeComponent implements OnInit {
 
-  constructor(private user: UserService, private me: MeService) { }
+  constructor(private albums: AlbumService, private me: MeService) { }
 
   ngOnInit() {
-    this.user.getUserCrateTracks('5a431681ef6b012eedac021c')
+    let page = new PaginationOptions();
+    page.sort = SortBy.DateCreated;
+    this.albums.getAlbums(page)
     .subscribe(
-      user => console.log(user),
-      err => console.log(err)
+      albums => console.log(albums)
     );
 
   }
