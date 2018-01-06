@@ -28,4 +28,9 @@ export class AlbumService extends CrateService {
     return this.http.get<Album>(endpoint, options);
   }
 
+  getAlbumTracks(albumId: string) {
+    const endpoint = this._apiUrl + `album${albumId}`;
+    return this.http.get<Album>(endpoint);
+  }
+
 }
