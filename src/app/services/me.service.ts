@@ -24,4 +24,6 @@ export class MeService extends CrateService {
     });
   }
 
+  // TODO: Add 'Add item to crate' method
+
 }

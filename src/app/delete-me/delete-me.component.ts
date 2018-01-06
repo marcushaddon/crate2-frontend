@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../services/artist.service';
+import { UserService } from '../services/user.service';
+import { MeService } from '../services/me.service';
 import { PaginationOptions } from '../models/pagination-options';
 import { SortBy } from '../enums/sort-options.enum';
 
@@ -10,14 +12,15 @@ import { SortBy } from '../enums/sort-options.enum';
 })
 export class DeleteMeComponent implements OnInit {
 
-  constructor(private artists: ArtistService) { }
+  constructor(private user: UserService, private me: MeService) { }
 
   ngOnInit() {
-    this.artists.getArtistTracks('584dc8a1a09826d22ff372d5')
+    this.user.getUserCrateTracks('5a431681ef6b012eedac021c')
     .subscribe(
-      tracks => console.log(tracks),
+      user => console.log(user),
       err => console.log(err)
     );
+
   }
 
 }
