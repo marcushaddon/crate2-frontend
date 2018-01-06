@@ -32,4 +32,9 @@ export class PlaylistService extends CrateService {
     return this.http.put<Playlist>(endpoint, playlist);
   }
 
+  deletePlaylist(playlist: Playlist): Observable<Response> {
+    const endpoint = this._apiUrl + `playlist/${playlist._id}`;
+    return this.http.delete<Response>(endpoint);
+  }
+
 }
