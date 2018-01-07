@@ -4,6 +4,8 @@ import { AlbumService } from '../services/album.service';
 import { MeService } from '../services/me.service';
 import { PaginationOptions } from '../models';
 import { SortBy, Sort } from '../enums/sort-options.enum';
+import { SearchService } from '../services/search.service';
+import { ApiEntity } from '../enums/api-entity.enum';
 
 @Component({
   selector: 'app-delete-me',
@@ -12,16 +14,13 @@ import { SortBy, Sort } from '../enums/sort-options.enum';
 })
 export class DeleteMeComponent implements OnInit {
 
-  constructor(private albums: AlbumService, private me: MeService) { }
+  constructor(private search: SearchService) { }
 
   ngOnInit() {
-    const page = new PaginationOptions();
-    console.log(page);
-    this.albums.getAlbums(page)
+    this.search.search('yas', ApiEntity.Artists)
     .subscribe(
-      albums => console.log(albums)
+      (results) => console.log(results)
     );
-
   }
 
 }

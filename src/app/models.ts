@@ -5,6 +5,7 @@ export * from './models/playlist';
 export * from './models/itrack-list';
 export * from './models/track';
 export * from './models/discogs-entity';
+export * from './models/search';
 
 export * from './models/pagination-options';
 

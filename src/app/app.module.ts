@@ -16,6 +16,7 @@ import { ArtistService } from './services/artist.service';
 import { AlbumService } from './services/album.service';
 import { PlaylistService } from './services/playlist.service';
 import { TrackService } from './services/track.service';
+import { SearchService } from './services/search.service';
 
 // Components
 import { HomeComponent } from './home/home.component';
@@ -60,6 +61,7 @@ const APP_ROUTES: Routes = [
     AlbumService,
     PlaylistService,
     TrackService,
+    SearchService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JWTInterceptor,
