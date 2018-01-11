@@ -20,9 +20,6 @@ export class Playlist implements ITrackList {
         return '/playlists/' + this._id;
     }
 
-    getTracks() {
-        
-    }
 }
 
 

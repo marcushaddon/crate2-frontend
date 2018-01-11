@@ -20,6 +20,6 @@ export class User {
 
 
 export class ShortUser {
-    public _id: string;
+    public userId: string;
     public userName: string;
 }

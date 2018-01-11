@@ -22,10 +22,9 @@ export class AlbumService extends CrateService {
     return this.http.get<Album[]>(endpoint, options);
   }
 
-  getAlbum(albumId: string, pagination = PaginationOptions.Default): Observable<Album> {
+  getAlbum(albumId: string): Observable<Album> {
     const endpoint = this._apiUrl + `album/${albumId}`;
-    const options = this.buildOptions(pagination);
-    return this.http.get<Album>(endpoint, options);
+    return this.http.get<Album>(endpoint);
   }
 
   getAlbumTracks(albumId: string): Observable<Track[]> {
