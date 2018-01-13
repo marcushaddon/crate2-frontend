@@ -50,7 +50,6 @@ export class MeService extends CrateService {
       return this.http.put(endpoint, item);
     }
     // Hmm?
-    console.log('you are nothing');
     return new Observable<null>();
   }
 }
