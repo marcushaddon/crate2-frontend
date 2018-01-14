@@ -43,10 +43,6 @@ export class StereoService {
 
   set tracklist(tracklist: ITrackList) {
     this._tracklist = tracklist;
-    // Don't alert everyone if we already have this tracklist queeueeued
-    if (this._tracklist._id === tracklist._id) {
-      return;
-    }
     this.tracklistChanged.next(this._tracklist);
   }
 
