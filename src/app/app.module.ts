@@ -29,6 +29,7 @@ import { FriendlyTimePipe } from './pipes/friendly-time.pipe';
 // Interceptors
 import { JWTInterceptor } from './interceptors/jwt.interceptor';
 import { DeleteMeComponent } from './delete-me/delete-me.component';
+import { MockHomeComponent } from './mock-home/mock-home.component';
 
 // Routes
 const APP_ROUTES: Routes = [
@@ -43,7 +44,8 @@ const APP_ROUTES: Routes = [
     StereoControlsComponent,
     FriendlyTimePipe,
     LoginComponent,
-    DeleteMeComponent
+    DeleteMeComponent,
+    MockHomeComponent
   ],
   imports: [
     BrowserModule,
