@@ -23,18 +23,20 @@ import { HomeComponent } from './home/home.component';
 import { StereoControlsComponent } from './stereo-controls/stereo-controls.component';
 import { LoginComponent } from './login/login.component';
 
+import { DeleteMeComponent } from './delete-me/delete-me.component';
+import { MockHomePageComponent } from './mock-home-page/mock-home-page.component';
+
 // Pipes
 import { FriendlyTimePipe } from './pipes/friendly-time.pipe';
 
 // Interceptors
 import { JWTInterceptor } from './interceptors/jwt.interceptor';
-import { DeleteMeComponent } from './delete-me/delete-me.component';
-import { MockHomeComponent } from './mock-home/mock-home.component';
+
 
 // Routes
 const APP_ROUTES: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent }
+  { path: '', component: MockHomePageComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -45,7 +47,7 @@ const APP_ROUTES: Routes = [
     FriendlyTimePipe,
     LoginComponent,
     DeleteMeComponent,
-    MockHomeComponent
+    MockHomePageComponent
   ],
   imports: [
     BrowserModule,
