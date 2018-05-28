@@ -1,8 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-/* This doesn't work for some reason */
 @import "../node_modules/bulma/sass/utilities/_all";
 @import "../node_modules/bulma/sass/grid/columns.sass";
-
 @import 'variables';
 
 .html, body {
