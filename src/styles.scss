@@ -2,3 +2,36 @@
 /* This doesn't work for some reason */
 @import "../node_modules/bulma/sass/utilities/_all";
 @import "../node_modules/bulma/sass/grid/columns.sass";
+
+@import 'variables';
+
+.html, body {
+    padding: none;
+    margin: 0;
+}
+
+// Inputs
+.search {
+    border: $thin-border;
+    padding: 0px 4px 0px 4px;
+
+    input[type=text] {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 4px;
+
+        border: none;
+
+        font-size: 20px;
+    }
+
+    input[type=text]:focus {
+        outline: none;
+    }
+
+}
+
+// Decorations?
+.border {
+    border: $thin-border;
+}
